@@ -55,7 +55,7 @@ jobs:
     # hexo deploy 部署博客文件
     - name: Deploy Public Blog
       env: 
-        REPO: github.com/muxiner/muxiner.github.io
+        REPO: github.com/muxiner/muxiner.github.io.git
         GH_TOKEN: ${{ secrets.GH_TOKEN }} 
       run: |
         git clone https://github.com/Muxiner/muxiner.github.io.git blog_files
@@ -63,5 +63,5 @@ jobs:
         cd blog_files
         git add .
         git commit -m "😁go to master"
-        git push --force --quiet "https://${GH_TOKEN}@${REPO}" master:master
+        git push --force --quiet origin master:master
         
