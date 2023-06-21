@@ -58,10 +58,10 @@ jobs:
         REPO: github.com/muxiner/muxiner.github.io
         GH_TOKEN: ${{ secrets.GH_TOKEN }} 
       run: |
-        git clone "https://github.com/muxiner/muxiner.github.io.git" blog_files
+        git clone https://github.com/Muxiner/muxiner.github.io.git blog_files
         cp -rf public/. blog_files
         cd blog_files
         git add .
         git commit -m "😁go to master"
-        git push --force --quiet "https://$GH_TOKEN@$REPO" master:master
+        git push --force --quiet "https://${GH_TOKEN}@${REPO}" master:master
         
