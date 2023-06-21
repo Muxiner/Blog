@@ -5,6 +5,11 @@ on:
   push:
     branches:
       - source
+env: 
+  GIT_USER: muxiner
+  REPO: github.com/muxiner/muxiner.github.io.git
+  GIT_CLONE_URL: "https://${REPO}"
+  GITHUB_PAGES_URL:  "https://${GIT_USER}:${{ secrets.GH_ACTIONS }}@${REPO}"
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
@@ -46,25 +51,19 @@ jobs:
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan github.com >> ~/.ssh/known_hosts
 
-    # # 配置 git 用户，用户邮箱
-    # - name: Prepare Git Env 
-    #   run: |
-    #     git config --global user.name "muxiner"
-    #     git config --global user.email "muxinerhuang@gmail.com"
+    # 配置 git 用户，用户邮箱
+    - name: Prepare Git Env 
+      run: |
+        git config --global user.name "muxiner"
+        git config --global user.email "muxinerhuang@gmail.com"
 
     # hexo deploy 部署博客文件
     - name: Deploy Public Blog
       run: |
-        mkdir -p ~/.ssh/
-        echo "${{ secrets.GH_ACTIONS }}" | tr -d '\r' > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-        git config --global user.name "muxiner"
-        git config --global user.email "muxinerhuang@gmail.com"
-        git clone https://github.com/Muxiner/muxiner.github.io.git blog_files
+        git clone ${{REPO}} blog_files
         cp -rf public/. blog_files
         cd blog_files
         git add .
         git commit -m "😁go to master"
-        git push --force --quiet origin master:master
+        git push --force --quiet ${{ env.GITHUB_PAGES_URL }} master:master
         
