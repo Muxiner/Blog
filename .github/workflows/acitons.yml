@@ -57,12 +57,11 @@ jobs:
       env: 
         REPO: github.com/muxiner/muxiner.github.io
         GH_TOKEN: ${{ secrets.GH_TOKEN }} 
-      run: | 
-        npx hexo deploy
-        # git clone "https://$REP.git" blog_files
-        # cp -rf public/. blog_files
-        # cd blog_files
-        # git add .
-        # git commit -m "😁go to master"
-        # git push --force --quiet "https://$GH_TOKEN@$REPO" master:master
+      run: |
+        git clone "https://$REP.git" blog_files
+        cp -rf public/. blog_files
+        cd blog_files
+        git add .
+        git commit -m "😁go to master"
+        git push --force --quiet "https://$GH_TOKEN@$REPO" master:master
         
