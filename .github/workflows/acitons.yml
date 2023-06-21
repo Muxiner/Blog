@@ -8,9 +8,9 @@ on:
 
 env: 
   GIT_USER: muxiner
-  REPO: github.com/muxiner/muxiner.github.io
+  REPO: github.com/muxiner/muxiner.github.io.git
   GIT_CLONE_URL: "https://${REPO}"
-  GITHUB_PAGES_URL:  "https://${GIT_USER}:${{ secrets.GH_ACTIONS }}@${REPO}"
+  GITHUB_PAGES_URL:  "https://${GIT_USER}:${{ secrets.GT_TOKEN }}@${REPO}"
 
 jobs:
   build_and_deploy:
@@ -49,7 +49,7 @@ jobs:
     - name: Prepare SSH Env 
       run: |
         mkdir -p ~/.ssh/
-        echo "${{ secrets.GH_ACTIONS }}" | tr -d '\r' > ~/.ssh/id_rsa
+        echo "${{ secrets.GT_TOKEN }}" | tr -d '\r' > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan github.com >> ~/.ssh/known_hosts
 
