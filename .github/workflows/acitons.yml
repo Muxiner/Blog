@@ -10,7 +10,7 @@ env:
   GIT_USER: muxiner
   REPO: github.com/muxiner/muxiner.github.io.git
   GIT_CLONE_URL: "https://${REPO}"
-  GITHUB_PAGES_URL:  "https://${GIT_USER}:${{ secrets.ACCESS_KEY }}@${REPO}"
+  # GITHUB_PAGES_URL:  "https://${GIT_USER}:${{ secrets.ACCESS_KEY }}@${REPO}"
 
 jobs:
   build_and_deploy:
@@ -69,5 +69,5 @@ jobs:
         cd blog_files
         git add .
         git commit -m "😁go to master"
-        git push --force --quiet ${{ env.GITHUB_PAGES_URL }} master:master
+        git push --force --quiet ${{ env.GIT_CLONE_URL }} master:master
         
