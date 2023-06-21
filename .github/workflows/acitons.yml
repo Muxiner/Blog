@@ -20,20 +20,6 @@ jobs:
       with:
         node-version: "16.x"
 
-    # 写入部署 SSH 密钥
-    - name: Prepare SSH Env 
-      run: |
-        mkdir -p ~/.ssh/
-        echo "${{ secrets.GH_ACTIONS }}" | tr -d '\r' > ~/.ssh/id_rsa
-        chmod 600 ~/.ssh/id_rsa
-        ssh-keyscan github.com >> ~/.ssh/known_hosts
-
-    # 配置 git 用户，用户邮箱
-    - name: Prepare Git Env 
-      run: |
-        git config --global user.name "muxiner"
-        git config --global user.email "muxinerhuang@gmail.com"
-
     # 安装 Hexo 依赖
     - name: Use Hexo      
       run: |
@@ -52,12 +38,29 @@ jobs:
         ls -al
         pwd
 
+    # 写入部署 SSH 密钥
+    - name: Prepare SSH Env 
+      run: |
+        mkdir -p ~/.ssh/
+        echo "${{ secrets.GH_ACTIONS }}" | tr -d '\r' > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+
+    # # 配置 git 用户，用户邮箱
+    # - name: Prepare Git Env 
+    #   run: |
+    #     git config --global user.name "muxiner"
+    #     git config --global user.email "muxinerhuang@gmail.com"
+
     # hexo deploy 部署博客文件
     - name: Deploy Public Blog
-      env: 
-        REPO: github.com/muxiner/muxiner.github.io.git
-        GH_TOKEN: ${{ secrets.GH_TOKEN }} 
       run: |
+        mkdir -p ~/.ssh/
+        echo "${{ secrets.GH_ACTIONS }}" | tr -d '\r' > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
+        ssh-keyscan github.com >> ~/.ssh/known_hosts
+        git config --global user.name "muxiner"
+        git config --global user.email "muxinerhuang@gmail.com"
         git clone https://github.com/Muxiner/muxiner.github.io.git blog_files
         cp -rf public/. blog_files
         cd blog_files
