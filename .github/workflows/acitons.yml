@@ -8,7 +8,7 @@ on:
 
 env: 
   GIT_USER: muxiner
-  REPO: github.com/muxiner/muxiner.github.io.git
+  REPO: github.com/muxiner/muxiner.github.io
   GIT_CLONE_URL: "https://${REPO}"
   GITHUB_PAGES_URL:  "https://${GIT_USER}:${{ secrets.GH_ACTIONS }}@${REPO}"
 
@@ -62,7 +62,7 @@ jobs:
     # hexo deploy 部署博客文件
     - name: Deploy Public Blog
       run: |
-        git clone ${{ env.REPO }} blog_files
+        git clone ${{ env.GIT_CLONE_URL }} blog_files
         cp -rf public/. blog_files
         cd blog_files
         git add .
