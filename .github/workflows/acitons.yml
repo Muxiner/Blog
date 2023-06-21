@@ -70,6 +70,8 @@ jobs:
         git add .
         git commit -m "😁go to master"
         git remote set-url origin git@github.com:muxiner/muxiner.github.io.git
+        ssh-agent bash
+        eval "$(ssh-agent -s)"
         ssh-add ~/.ssh/id_rsa
         git push --force --quiet master:master
         
