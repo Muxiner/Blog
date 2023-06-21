@@ -58,7 +58,7 @@ jobs:
         REPO: github.com/muxiner/muxiner.github.io
         GH_TOKEN: ${{ secrets.GH_TOKEN }} 
       run: |
-        git clone "https://$REP.git" blog_files
+        git clone "https://github.com/muxiner/muxiner.github.io.git" blog_files
         cp -rf public/. blog_files
         cd blog_files
         git add .
