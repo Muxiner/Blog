@@ -54,6 +54,9 @@ jobs:
         echo "${{ secrets.ACCESS_KEY }}" | tr -d '\r' > ~/.ssh/id_rsa
         chmod 600 ~/.ssh/id_rsa
         ssh-keyscan github.com >> ~/.ssh/known_hosts
+        ssh-agent bash
+        eval "$(ssh-agent -s)"
+        ssh-add ~/.ssh/id_rsa
 
     # 配置 git 用户，用户邮箱
     - name: Prepare Git Env 
@@ -70,8 +73,5 @@ jobs:
         git add .
         git commit -m "😁go to master"
         git remote set-url origin git@github.com:muxiner/muxiner.github.io.git
-        ssh-agent bash
-        eval "$(ssh-agent -s)"
-        ssh-add ~/.ssh/id_rsa
         git push --force --quiet master:master
         
