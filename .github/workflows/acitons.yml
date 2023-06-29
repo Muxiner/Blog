@@ -69,6 +69,8 @@ jobs:
       run: |
         git clone ${{ env.GIT_CLONE_URL }} blog_files
         cp -rf public/. blog_files
+        ls blog_files | grep -v assets | xargs rm -rf
+        cp -rf public/. blog_files
         cd blog_files
         git add .
         git commit -m "😁go to master"
