@@ -72,5 +72,6 @@ jobs:
         cd blog_files
         git add .
         git commit -m "😁go to master"
-        git push --force --quiet master:master
+        git remote set-url origin git@github.com:Muxiner/muxiner.github.io.git
+        git push origin master
         
