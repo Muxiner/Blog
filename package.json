@@ -28,6 +28,6 @@
     "hexo-server": "^3.0.0",
     "hexo-theme-fluid": "^1.9.4",
     "hexo-theme-landscape": "^1.0.0",
-    "stylus": "^0.60.0"
+    "stylus": "^0.61.0"
   }
 }
